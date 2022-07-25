@@ -1,0 +1,130 @@
+---
+title: "STA130 Rstudio Demo"
+author: "Scott Schwartz"
+date: "Fall 2022 Week 1"
+output:
+  pdf_document: default
+---
+
+<!-- Text in here is "html comments" that are not ever printed out -->
+<!-- The block up above controls "YAML" settings of this .Rmd file: 
+     for example, knitting this .Rmd will result in a pdf document
+     
+     Markdown provides simple syntax constructions for document formatting   
+     Below we make a nice checklist.  For more examples of Markdown, see
+     https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf -->
+
+The purpose of this demo is to:
+
+1. [ ] Show how to access Jupyterhub and navigate RStudio
+2. [ ] Introduce .Rmd files, html/R comments, and code chunks **[source pane]**
+3. [ ] Introduce `parameter=argument` syntax controlling code chunks **[source pane]**
+3. [ ] Demonstrate R calculator arithmetic (`+`,`*`,`^`, etc.) and logic (`&`,`|`,`!`, etc.) **[console pane]**
+4. [ ] Discuss loadable packages like `tidyverse` and `tibble` which add functions  
+   like `tidyverse::read_csv()` and `tibble::read_csv()` to the R calculator
+6. [ ] Introduce the `<cmd-shift-M>` (Mac) and `<ctrl-shift-M>` (PC) "pipe symbol" ` %>%  
+6. [ ] Introduce `<-`, `->`, and `=` variable assignments in R **[source/console pane]**
+7. [ ] Show variable and data set management and the `rm()` function **[environment pane]**
+8. [ ] Show how to run code with `<cmd-shift-return>` (Mac) and `<ctrl-shift-enter>` (PC),  
+   and the "play" and "knit" buttons **[source pane]**
+9. [ ] Show exporting/downloading files from RStudio, organizing and managing files,  
+   and course Rmd+pdf submission protocols **[files pane]**
+10. [ ] Highlight Tutorial, Packages, and Help tabs **[environment/files pane]**
+
+
+<!-- Below is code chunk where R code goes -->
+<!-- The `parameter=argument` configuration in the curly brackets controls 
+     how the code chunk is used during knitting -->
+```{r, eval=TRUE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+# Code chunks have `#` "R comments" instead of `<!-- -->` "html comments"
+# The `eval=TRUE` means this code will be run during knitting
+# The `include=FALSE` means neither code nor output will be included in the knit
+# The `echo=FALSE` (with `include=TRUE`) will print the output but not code chunk  
+# The `message=FALSE` means informational messages won't be shown in the knit
+# The `warning=FALSE` means warning alert message won't be shown in the knit
+# https://rmarkdown.rstudio.com/lesson-3.html
+
+# Rather than always specifying these, we'll set them to all default to `FALSE`
+# This means knitting completely ignore all code-chunk by default
+knitr::opts_chunk$set(eval=FALSE, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE)
+# `knitr::` means not having to run `library(knitr)` to access `opts_chunk`
+```
+
+<!-- Knitting will completely ignore this code chunk under the above defaults -->
+```{r} 
+# load tidyverse functionality <-- make code "easy to understand" with comments!
+library(tidyverse) # `install.packages("tidyverse")` isn't needed 
+                   #  on jupyterhub for the `tidyverse` package
+```
+
+## Question 1
+
+Run the R code chunk below that contains `tidyverse` functions to load and show a data set of coffee ratings.
+
+- use key-binding shortcuts cmd-shift-return (Mac) or ctrl-shift-enter (PC), or the green "play" button 
+- "could not find function" for `read_csv()` or `glimpse()` is fixed by running `library(tidyverse)` 
+- "cannot open file" is fixed by putting the file with the right name in the same directory as the .Rmd
+
+
+```{r} 
+coffee_ratings <- read_csv("coffee_ratings.csv") # rather than `read.csv()`
+head(coffee_ratings)        # <- compare what this line of code does
+# coffee_ratings %>% head() # <- versus what this line of code does
+# The `%>%` "pipe symbol" is created with <ctrl-shift-M> or <cmd-shift-M>
+```
+<!-- The "pipe symbol" in other context is sometimes `|`; but, since this is
+     the logical `or` operator in R, for R the "pipe symbol is `%>%` -->
+
+
+### (a) Use the glimpse() function output above to determine how many rows and columns there are in the coffee ratings dataset. 
+
+```{r} 
+glimpse(coffee_ratings)        # <- compare what this line of code does
+# coffee_ratings %>% glimpse() # <- versus what this line of code does
+# The `%>%` "pipe symbol" is created with <ctrl-shift-M> or <cmd-shift-M>
+```
+
+### (b) Change the property of the R code chunks above so the knit file shows the code and both the message from `read_csv` and the output from `glimpse`.
+
+### (c) Change the property of the R code chunk below so the plot of overall coffee ratings appears in the knitted output.
+
+```{r}
+# Can you read this code? What do you roughly think it's doing?
+coffee_ratings %>% # E.g., what does the `%>%` seem to be doing?
+  ggplot(aes(x=total_cup_points)) + # E.g., what about `+` !??
+  geom_histogram(bins=30, color="black", fill="light blue")
+  # Note here that R code uses the same `parameter=argument` pairing as knitting
+```
+
+## Module 1 Homework Preview
+
+```{r}
+# https://www.tidyverse.org/
+# `install.packages("tidyverse")` isn't needed on jupyterhub for `tidyverse`
+library(tidyverse)
+```
+
+```{r, eval=FALSE, echo=FALSE, include=FALSE, message=FALSE}
+# https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-11/readme.md
+#install.packages("appa")
+# https://github.com/averyrobbins1/appa
+#devtools::install_github("averyrobbins1/appa")
+library(appa)
+?appa
+```
+
+```{r, eval=FALSE, echo=FALSE, include=TRUE, message=FALSE}
+avatar <- read_csv("avatar.csv")
+avatar %>% glimpse()
+```
+
+## More Resources
+
+Looking for other presentations of this material? Try out the following resources.
+
+- [R for Data Science Chapter 4: Workflow basics](https://r4ds.had.co.nz/workflow-basics.html)
+
+- [Rstudio Primer: Programming Basics](https://rstudio.cloud/learn/primers/1.2)
+
+- [The Department of Statistical Science Toolkit](https://dosstoolkit.com/)
+
