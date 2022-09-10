@@ -20,11 +20,11 @@ The purpose of this demo is to:
 2. [ ] Introduce .Rmd files, html/R comments, and code chunks **[source pane]**
 3. [ ] Introduce `parameter=argument` syntax controlling code chunks **[source pane]**
 3. [ ] Demonstrate R calculator arithmetic (`+`,`*`,`^`, etc.) and logic (`&`,`|`,`!`, etc.) **[console pane]**
-4. [ ] Discuss loadable packages like `tidyverse` and `tibble` which add functions  
-   like `tidyverse::read_csv()` and `tibble::read_csv()` to the R calculator
-6. [ ] Introduce the `<cmd-shift-M>` (Mac) and `<ctrl-shift-M>` (PC) "pipe symbol" ` %>%  
-6. [ ] Introduce `<-`, `->`, and `=` variable assignments in R **[source/console pane]**
-7. [ ] Show variable and data set management and the `rm()` function **[environment pane]**
+4. [ ] Discuss loadable packages like `readr`, `tibble`, and `tidyverse` which add   
+   functions like `readr::read_csv()` and `tibble::tibble()` to the R calculator
+5. [ ] Introduce `<-`, `->`, and `=` variable assignments in R **[source/console pane]**
+6. [ ] Show variable and data set management and the `rm()` function **[environment pane]**
+7. [ ] Introduce the `<cmd-shift-M>` (Mac) and `<ctrl-shift-M>` (PC) "pipe symbol" `%>%`  
 8. [ ] Show how to run code with `<cmd-shift-return>` (Mac) and `<ctrl-shift-enter>` (PC),  
    and the "play" and "knit" buttons **[source pane]**
 9. [ ] Show exporting/downloading files from RStudio, organizing and managing files,  
@@ -69,7 +69,7 @@ Run the R code chunk below that contains `tidyverse` functions to load and show 
 ```{r} 
 coffee_ratings <- read_csv("coffee_ratings.csv") # rather than `read.csv()`
 head(coffee_ratings)        # <- compare what this line of code does
-# coffee_ratings %>% head() # <- versus what this line of code does
+#coffee_ratings %>% head() # <- versus what this line of code does
 # The `%>%` "pipe symbol" is created with <ctrl-shift-M> or <cmd-shift-M>
 ```
 <!-- The "pipe symbol" in other context is sometimes `|`; but, since this is
@@ -104,7 +104,7 @@ coffee_ratings %>% # E.g., what does the `%>%` seem to be doing?
 library(tidyverse)
 ```
 
-```{r, eval=FALSE, echo=FALSE, include=FALSE, message=FALSE}
+```{r}
 # https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-08-11/readme.md
 #install.packages("appa")
 # https://github.com/averyrobbins1/appa
@@ -113,8 +113,8 @@ library(appa)
 ?appa
 ```
 
-```{r, eval=FALSE, echo=FALSE, include=TRUE, message=FALSE}
-avatar <- read_csv("avatar.csv")
+```{r, include=TRUE}
+avatar <- appa # read_csv("avatar.csv")
 avatar %>% glimpse()
 ```
 
